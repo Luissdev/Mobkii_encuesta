@@ -1,0 +1,27 @@
+1) Crear proyecto: composer create-project laravel/laravel=5.0 Gestormagenes
+
+2) Ruta pra el servidor local: C:\xampp\apache\conf\extra\httpd-vhosts.conf
+Primero se tiene que editar el host en windows/system32/etc/hosts
+
+3) Creamos la base de datos en phpmyadmin
+
+4) Poner nombre a la aplicacion: php artisan app:name GestorImagenes
+
+5) Abrir .env y cuando estemos en entorno de produccion falsear APP_DEBUG
+Hacer la configuracion de la base de datos, host, etc...
+
+6) Crear modelos, el usuario siempre se deja como esta, los demas solo se eliminan implementaciones y librerias
+
+7) Crear relaciones por medio de funciones
+
+8) Crear los controladores de los modelos, ir al archivo AthenticateAndRegisterUsers y copiar los metodos para despues editarlos conforme al nuevo proyecto
+Agregar el metodo a cada controlador para que si ingresan una ruta incorrecta salga ese error
+public function missingMethod($parameters = array())
+{
+	abort(404);
+}
+
+9) Crear las rutas(direcciones) y middlewares
+
+
+minuto 5:02
