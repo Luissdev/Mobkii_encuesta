@@ -26,8 +26,10 @@ class Negocio extends Model{
 	 */
 	protected $hidden = ['password', 'remember_token'];
 
+/*	public function usuarios(){
 		return $this->hasMany('Mobkii\Usuario');
 	}
+*/
 	public function productos(){
 		return $this->hasMany('Mobkii\Producto');
 	}

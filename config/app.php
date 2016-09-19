@@ -136,6 +136,7 @@ return [
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'Maatwebsite\Excel\ExcelServiceProvider',
+		'Orangehill\Iseed\IseedServiceProvider',
 
 
 		/*

@@ -116,6 +116,14 @@ class UsuarioController extends Controller {
 		return "mostrando formulario de perfil";
 	}
 
+	public function getSeedUsuario(){
+		\Iseed::generateSeed('negocio');
+		\Iseed::generateSeed('usuarios');
+		\Iseed::generateSeed('categorias');
+		\Iseed::generateSeed('productos');
+		\Iseed::generateSeed('pedidos');
+	}
+
 	public function postEditarPerfil(){
 		return "generando actualizacion de perifl";
 	}
