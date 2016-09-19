@@ -1,4 +1,4 @@
-<?php namespace App\Http\Controllers;
+<?php namespace Mobkii\Http\Controllers;
 
 class InicioController extends Controller {
 

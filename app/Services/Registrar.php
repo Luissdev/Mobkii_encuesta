@@ -1,6 +1,6 @@
-<?php namespace App\Services;
+<?php namespace Mobkii\Services;
 
-use App\User;
+use Mobkii\Usuario;
 use Validator;
 use Illuminate\Contracts\Auth\Registrar as RegistrarContract;
 
@@ -15,8 +15,8 @@ class Registrar implements RegistrarContract {
 	public function validator(array $data)
 	{
 		return Validator::make($data, [
-			'name' => 'required|max:255',
-			'email' => 'required|email|max:255|unique:users',
+			'nombre' => 'required|max:255',
+			'email' => 'required|email|max:255|unique:usuarios',
 			'password' => 'required|confirmed|min:6',
 		]);
 	}
@@ -29,8 +29,8 @@ class Registrar implements RegistrarContract {
 	 */
 	public function create(array $data)
 	{
-		return User::create([
-			'name' => $data['name'],
+		return Usuario::create([
+			'nombre' => $data['nombre'],
 			'email' => $data['email'],
 			'password' => bcrypt($data['password']),
 		]);

@@ -15,11 +15,10 @@
 Route::controllers([
 	'validacion' => 'Validacion\ValidacionController',
 	'validado' => 'InicioController',
-	'validado/cliente' => 'ClienteController',
-	'validado/usuario' => 'UsuarioController',
-	'validado/productos' => 'ProductoController',
-	'validado/pedidos' => 'PedidoController',
-	'validado/categorias' => 'CategoriaController',
+	'auth/usuario' => 'UsuarioController',
+	'auth/productos' => 'ProductoController',
+	'auth/pedidos' => 'PedidoController',
+	'auth/categoria' => 'CategoriaController',
+	'/tienda' => 'TiendaController',
 	'/' => 'BienvenidoController',
-/*	'password' => 'Auth\PasswordController',*/
 ]);

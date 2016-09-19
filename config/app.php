@@ -39,7 +39,7 @@ return [
 	|
 	*/
 
-	'timezone' => 'UTC',
+	'timezone' => 'America/Mexico_City',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -135,16 +135,17 @@ return [
 		'Illuminate\Translation\TranslationServiceProvider',
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
+		'Maatwebsite\Excel\ExcelServiceProvider',
+
 
 		/*
 		 * Application Service Providers...
 		 */
-		'App\Providers\AppServiceProvider',
-		'App\Providers\BusServiceProvider',
-		'App\Providers\ConfigServiceProvider',
-		'App\Providers\EventServiceProvider',
-		'App\Providers\RouteServiceProvider',
-
+		'Mobkii\Providers\AppServiceProvider',
+		'Mobkii\Providers\BusServiceProvider',
+		'Mobkii\Providers\ConfigServiceProvider',
+		'Mobkii\Providers\EventServiceProvider',
+		'Mobkii\Providers\RouteServiceProvider',
 	],
 
 	/*
@@ -192,6 +193,7 @@ return [
 		'URL'       => 'Illuminate\Support\Facades\URL',
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
+		'Excel' => 'Maatwebsite\Excel\Facades\Excel',
 
 	],
 

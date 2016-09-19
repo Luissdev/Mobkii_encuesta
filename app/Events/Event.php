@@ -1,4 +1,4 @@
-<?php namespace App\Events;
+<?php namespace Mobkii\Events;
 
 abstract class Event {
 

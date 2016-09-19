@@ -19,12 +19,12 @@ class Pedido extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'cantidad_producto', 'subtotal', 'iva', 'id_cliente', 'id_usuario', 'id_producto'. 'status'];
+    protected $fillable = ['id', 'cantidad_producto', 'subtotal', 'iva', 'id_usuario', 'id_producto', 'status'];
 
 
-    public function clientes(){
+/*    public function clientes(){
         return $this->belongsTo('Mobkii\Cliente');
-    }
+    }*/
     public function usuario(){
         return $this->belongsTo('Mobkii\Usuario');
     }

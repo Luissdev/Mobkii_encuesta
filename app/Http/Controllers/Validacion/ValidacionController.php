@@ -1,9 +1,11 @@
-<?php namespace App\Http\Controllers\Validacion;
+<?php namespace Mobkii\Http\Controllers\Validacion;
 
-use App\Http\Controllers\Controller;
+use Mobkii\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Http\Request;
+use Mobkii\Http\Requests\IniciarSesionRequest;
 
 class ValidacionController extends Controller {
 
@@ -30,7 +32,7 @@ class ValidacionController extends Controller {
 		$this->auth = $auth;
 		$this->registrar = $registrar;
 
-		$this->middleware('guest', ['except' => 'getLogout']);
+		$this->middleware('guest', ['except' => 'getSalida']);
 	}
 
 
@@ -87,7 +89,7 @@ class ValidacionController extends Controller {
 	 */
 	public function getInicio()
 	{
-		return view('validacion.login');
+		return view('validacion.inicio');
 	}
 
 	/**
@@ -96,7 +98,7 @@ class ValidacionController extends Controller {
 	 * @param  \Illuminate\Http\Request  $request
 	 * @return \Illuminate\Http\Response
 	 */
-	public function postInicio(Request $request)
+	public function postInicio(IniciarSesionRequest $request)
 	{
 		$this->validate($request, [
 			'email' => 'required|email', 'password' => 'required',
@@ -164,7 +166,7 @@ class ValidacionController extends Controller {
 	}
 
 	public function getRecuperar(){
-		return "Recuperando contraseña";
+		return view('validacion.recuperar')->with('recuperada', 'Su contraseña ha sido recuperada');
 	}
 
 	public function postRecuperar(){

@@ -1,4 +1,4 @@
-<?php namespace App\Http\Controllers;
+<?php namespace Mobkii\Http\Controllers;
 
 class PedidoController extends Controller {
 
@@ -58,6 +58,10 @@ class PedidoController extends Controller {
 
 	public function postEliminarProducto(){
 		return "eliminando producto";
+	}
+
+	public function getVerPedidos(){
+		return 'mostrando la lista de los pedidos';
 	}
 
 	public function missingMethod($parameters = array())

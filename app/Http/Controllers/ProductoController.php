@@ -1,5 +1,11 @@
-<?php namespace App\Http\Controllers;
-
+<?php namespace Mobkii\Http\Controllers;
+use Mobkii\Producto;
+use Mobkii\Categoria;
+use Mobkii\Http\Requests\EditarProductoRequest;
+use Mobkii\Http\Requests\AgregarProductoRequest;
+use Mobkii\Http\Requests\ImportarProductoRequest;
+use Carbon\Carbon;
+use Maatwebsite\Excel\Facades\Excel;
 class ProductoController extends Controller {
 
 	/*
@@ -25,43 +31,124 @@ class ProductoController extends Controller {
 
 
 	public function getIndex(){
-		return "mostrando productos";
+		$productos = Producto::paginate();
+
+		return view('producto.mostrar_producto', ['productos'=> $productos]);
 	}
-	/**
-	 * Show the application dashboard to the user.
-	 *
-	 * @return Response
-	 */
-	public function getCrearProducto()
+
+	public function getEditarProducto($id){
+		$categorias = Categoria::get();
+		$producto = Producto::find($id);
+		return view('producto.editar_producto', ['producto'=>$producto, 'categorias'=>$categorias]);
+	}
+
+	public function postEditarProducto(EditarProductoRequest $request){
+
+		$producto = Producto::find($request->get('id'));
+
+		if($request->hasFile('imagen'))
+		{
+			$imagen = $request->file('imagen');
+			$ruta = '/img/';
+			$nombre = sha1(Carbon::now()).'.'.$imagen->guessExtension();
+
+			$imagen->move(getcwd().$ruta, $nombre);
+
+			$rutaanterior = getcwd().$producto->imagen;
+
+/*			if(file_exists($rutaanterior))
+			{
+				unlink(realpath($rutaanterior));
+			}*/
+
+			$producto->imagen = $ruta.$nombre;
+		}
+
+		$producto->nombre = $request->get('nombre');
+		$producto->precio = $request->get('precio');
+		$producto->descripcion = $request->get('descripcion');
+		$producto->id_categoria = $request->get('id_categoria');
+		$producto->status = $request->get('status');
+		
+		$producto->save();
+
+		return redirect("auth/productos")->with('succes', 'El producto fue actualizado correctamente');
+	}
+
+
+	public function getEliminarProducto($id){
+		$producto = Producto::find($id);
+
+		$producto->delete();
+
+		return redirect('auth/productos/')->with('succes', 'El producto se ha eliminado correctamente.');
+	}
+
+	public function getAgregarProducto(){
+		$categorias = Categoria::get();
+		return view('producto.agregar_producto')->with('categorias', $categorias);
+	}
+
+	public function postAgregarProducto(AgregarProductoRequest $request){
+		$img = $request->file('imagen');
+		$ruta = '/img/';
+		$nombre = sha1(Carbon::now()).'.'.$img->guessExtension();
+		$img->move(getcwd().$ruta, $nombre);
+		Producto::create([
+			'nombre' => $request->get('nombre'),
+			'precio' => $request->get('precio'),
+			'imagen' => $ruta.$nombre,
+			'descripcion' => $request->get('descripcion'),
+			'id_categoria' => $request->get('id_categoria'),
+			'status' => $request->get('status'),
+			]);
+
+		return redirect('auth/productos')->with('succes', 'El producto fue agregado correctamente.');
+	}
+
+	public function getImportarProducto(){
+		return view('producto.importar_producto');
+	}
+	public function postImportarProducto(ImportarProductoRequest $request)
 	{
-		return "creando producto";
+		$csv = $request->file('csv');
+		$ruta = '/csv/';
+		$nombre = sha1(Carbon::now()).'.'.$csv->getClientOriginalExtension();
+		$csv->move(getcwd().$ruta, $nombre);
+		$csv = public_path().$ruta.$nombre;
+
+		Excel::load($csv, function($reader) {
+
+			foreach ($reader->get() as $producto) {
+				Producto::create([
+					'nombre' => $producto->nombre,
+					'precio' => $producto->precio,
+					'descripcion' => $producto->descripcion,
+					'id_categoria' => $producto->id_categoria,
+					'status' => $producto->estado
+					]);
+			}
+		});
+	return redirect('auth/productos')->with('succes', 'La lista de productos fue agregada correctamente.');
 	}
 
-	public function postCrearProducto(){
-		return "almacenando foto";
-	}
+/*	Excel::load($csv, function($reader) {
+		foreach ($reader->get() as $row) {
+			Producto::create([
+				'nombre' => $row->get('nombre'),
+				'precio' => $row->get('precio'),
+				'descripcion' => $row->get('descripcion'),
+				'id_categoria' => $row->get('id_categoria'),
+				'status' => $row->get('status'),
+				]);
+			echo $row->get('nombre');
+		}
+	});
+	return;*/
 
-	public function getActualizarProducto()
-	{
-		return "actualizar producto";
-	}
 
-	public function postActualizarProducto(){
-		return "actualizando producto";
-	}
-
-
-	public function getEliminarProducto()
-	{
-		return "Eliminar producto";
-	}
-
-	public function postEliminarProducto(){
-		return "eliminando producto";
-	}
-
-	public function missingMethod($parameters = array())
-	{
-		abort(404);
-	}
+public function missingMethod($parameters = array())
+{
+	abort(404);
+}
 }

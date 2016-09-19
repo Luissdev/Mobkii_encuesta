@@ -13,21 +13,26 @@ class Producto extends Model
      * @var string
      */
     protected $table = 'productos';
+    protected $perPage = 12;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['id', 'nombre', 'precio', 'imagen', 'descripcion', 'id_cliente', 'id_categoria', 'status'];
+    protected $fillable = ['id', 'nombre', 'precio', 'imagen', 'descripcion', 'id_categoria', 'status'];
 
     public function categoria(){
         return $this->belongsTo('Mobkii\Categoria');
     }
+/*
+    public function usuario(){
+        return $this->belongsTo('Mobkii\Usuario');
+    }*/
 
-    public function  cliente(){
+/*    public function  cliente(){
         return $this->belongsTo('Mobkii\Cliente');
-    }
+    }*/
 
     public function pedidos(){
         return $this->hasMany('Mobkii\Pedido');

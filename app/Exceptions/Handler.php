@@ -1,7 +1,8 @@
-<?php namespace App\Exceptions;
+<?php namespace Mobkii\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Session\TokenMismatchException;
 
 class Handler extends ExceptionHandler {
 
@@ -36,14 +37,20 @@ class Handler extends ExceptionHandler {
 	 */
 	public function render($request, Exception $e)
 	{
-		if ($this->isHttpException($e))
+/*		if ($this->isHttpException($e))
 		{
 			return $this->renderHttpException($e);
+		}*/
+		if ($e instanceof TokenMismatchException) {
+			return redirect($request->url())->with('csrf', 'Al parecer pasó mucho tiempo, intenta de nuevo.');
 		}
-		else
-		{
+
+		if (config('app.debug')) {
+			# code...
 			return parent::render($request, $e);
 		}
+
+		return redirect('/')->with('error', 'Error desconocido, vuelve a recargar la pagina por favor.');
 	}
 
 }

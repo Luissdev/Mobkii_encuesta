@@ -7,6 +7,19 @@ html {
 body {
   margin: 0;
 }
+
+.white-bg{
+    background:#ffffff;
+}
+
+.bg-color{
+  background: #34495e;
+}
+
+
+.margen{
+  margin-top: 3%;
+}
 article,
 aside,
 details,

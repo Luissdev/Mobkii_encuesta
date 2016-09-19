@@ -1,4 +1,4 @@
-<?php namespace App;
+<?php namespace Mobkii;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
@@ -22,7 +22,7 @@ class Usuario extends Model implements AuthenticatableContract, CanResetPassword
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['id', 'nombre', 'email', 'password', 'id_cliente', 'status'];
+	protected $fillable = ['id', 'nombre', 'email', 'password', 'admin', 'status'];
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -31,11 +31,10 @@ class Usuario extends Model implements AuthenticatableContract, CanResetPassword
 	 */
 	protected $hidden = ['password', 'remember_token'];
 
-	public function cliente(){
+/*	public function cliente(){
 		return $this->belongsTo('Mobkii\Cliente');
-	}
+	}*/
 	public function pedidos(){
 		return $this->hasMany('Mobkii\Pedido');
 	}
-
 }
