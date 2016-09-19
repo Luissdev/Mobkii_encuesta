@@ -1,9 +1,8 @@
 <?php namespace Mobkii\Http\Requests;
 
 use Mobkii\Http\Requests\Request;
-use Mobkii\Usuario;
 
-class EditarUsuarioRequest extends Request {
+class ImportarCategorias extends Request {
 
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -23,9 +22,7 @@ class EditarUsuarioRequest extends Request {
 	public function rules()
 	{
 		return [
-		'nombre' => 'required',
-		'email' => 'required|email',
-		'status' => 'required',
+			'csv' => 'required',
 		];
 	}
 

@@ -47,13 +47,6 @@
 								<input type="password" class="form-control" name="password_confirmation">
 							</div>
 						</div>
-
-						<div class="form-group">
-							<label class="col-md-4 control-label">Administrador</label>
-							<div class="col-md-6">
-								<input type="text" class="form-control" name="admin" value="{{old('admin')}}">
-							</div>
-						</div>
 						<div class="form-group">
 							<label class="col-md-4 control-label">Status</label>
 							<div class="col-md-6">

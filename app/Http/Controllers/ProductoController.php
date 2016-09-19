@@ -100,6 +100,7 @@ class ProductoController extends Controller {
 			'imagen' => $ruta.$nombre,
 			'descripcion' => $request->get('descripcion'),
 			'id_categoria' => $request->get('id_categoria'),
+			'id_negocio' => $request->get('id_negocio'),
 			'status' => $request->get('status'),
 			]);
 
@@ -125,30 +126,27 @@ class ProductoController extends Controller {
 					'precio' => $producto->precio,
 					'descripcion' => $producto->descripcion,
 					'id_categoria' => $producto->id_categoria,
-					'status' => $producto->estado
+					'status' => $producto->status,
+					'imagen' => $producto->imagen,
+					'id_negocio' => 1,
+					'id_categoria' => 1
 					]);
 			}
 		});
-	return redirect('auth/productos')->with('succes', 'La lista de productos fue agregada correctamente.');
+		return redirect('auth/productos')->with('succes', 'La lista de productos fue agregada correctamente.');
 	}
 
-/*	Excel::load($csv, function($reader) {
-		foreach ($reader->get() as $row) {
-			Producto::create([
-				'nombre' => $row->get('nombre'),
-				'precio' => $row->get('precio'),
-				'descripcion' => $row->get('descripcion'),
-				'id_categoria' => $row->get('id_categoria'),
-				'status' => $row->get('status'),
-				]);
-			echo $row->get('nombre');
-		}
-	});
-	return;*/
+	public function getExportarProductos(){		
+		Excel::create('Filename', function($excel) {
+			$excel->sheet('Sheetname', function($sheet) {
+				$prices = Producto::get();
+				$sheet->fromModel($prices);
+			});
+		})->download('xls');
+	}
 
-
-public function missingMethod($parameters = array())
-{
-	abort(404);
-}
+	public function missingMethod($parameters = array())
+	{
+		abort(404);
+	}
 }

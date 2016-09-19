@@ -11,11 +11,13 @@
 	<div class="row col-md-10 col-md-offset-1 custyle">
 		<table class="table table-striped custab">
 			<thead>
-				<a href="usuario/agregar-usuario" class="btn btn-primary btn-sm pull-right"><b>+</b> Agregar nuevo usuario</a>
+				<a href="usuario/agregar-usuario" class="btn btn-primary btn-sm pull-right" style="margin-left: 4px;"><span class="glyphicon glyphicon-plus"></span> Agregar nuevo usuario</a>
+				<a href="usuario/importar-usuario" class="btn btn-primary btn-sm pull-right" style="margin-left: 4px;"> <span class="glyphicon glyphicon-plus"></span> Importar lista de usuario</a>
+				<a href="usuario/exportar-usuarios" class="btn btn-primary btn-sm pull-right" style="margin-left: 4px;"> <span class="glyphicon glyphicon-plus"></span> Exportar lista de usuario</a>
 				<tr>
 					<th>Nombre</th>
 					<th>Correo</th>
-					<th>Administrador</th>
+					{{-- <th>Administrador</th> --}}
 					<th>Status</th>
 					<th class="text-center">Acción</th>
 				</tr>
@@ -24,7 +26,7 @@
 			<tr>
 				<td>{{$usr->nombre}}</td>
 				<td>{{$usr->email}}</td>
-				<td>@if($usr->admin==1) Si @else No @endif</td>
+			{{-- 	<td>@if($usr->admin==1) Si @else No @endif</td> --}}
 				<td>@if($usr->status==1) Activo @else Inactivo @endif</td>
 				<td class="text-center"><a class='btn btn-info btn-xs' href="usuario/editar-usuario/{{$usr->id}}" data-toggle="modal1" data-target=".bd-example-modal-sm"><span class="glyphicon glyphicon-edit"></span> Editar</a> <a href="" class="btn btn-danger btn-xs" data-toggle="modal" data-target=".bd-example-modal-sm"><span class="glyphicon glyphicon-remove"></span> Eliminar</a></td>
 			</tr>

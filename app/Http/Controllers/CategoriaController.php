@@ -2,7 +2,10 @@
 
 use Mobkii\Categoria;
 use Mobkii\Http\Requests\EditarCategoriaRequest;
+use Maatwebsite\Excel\Facades\Excel;
 use Mobkii\Http\Requests\AgregarCategoriaRequest;
+use Mobkii\Http\Requests\ImpotarCategorias;
+use Carbon\Carbon;
 class CategoriaController extends Controller {
 
 
@@ -74,6 +77,41 @@ class CategoriaController extends Controller {
 			]);
 
 		return redirect('auth/categoria')->with('succes', 'La categoria fue agregado correctamente.');
+	}
+
+	public function getImportarCategoria(){
+		return view('usuario.importar_usuario');
+	}
+
+	public function postImportarCategoria(ImpotarCategorias $request)
+	{
+		$csv = $request->file('csv');
+		$ruta = '/csv/';
+		$nombre = sha1(Carbon::now()).'.'.$csv->getClientOriginalExtension();
+		$csv->move(getcwd().$ruta, $nombre);
+		$csv = public_path().$ruta.$nombre;
+
+		Excel::load($csv, function($reader) {
+
+			foreach ($reader->get() as $usr) {
+				Usuario::create([
+					'nombre' => $usr->nombre,
+					'descripcion' => $usr->descripcion,
+					'status' => $usr->status
+					]);
+			}
+		});
+		return redirect('auth/categoria')->with('succes', 'La lista de categorias fue agregada correctamente.');
+	}
+
+
+	public function getExportarCategorias(){
+		Excel::create('Filename', function($excel) {
+			$excel->sheet('Sheetname', function($sheet) {
+				$prices = Categoria::get();
+				$sheet->fromModel($prices);
+			});
+		})->download('xls');
 	}
 
 	public function missingMethod($parameters = array())

@@ -22,7 +22,7 @@ class Usuario extends Model implements AuthenticatableContract, CanResetPassword
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['id', 'nombre', 'email', 'password', 'admin', 'status'];
+	protected $fillable = ['id', 'nombre', 'email', 'password', 'direccion','info', 'status'/*, 'id_negocio'*/];
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -30,11 +30,12 @@ class Usuario extends Model implements AuthenticatableContract, CanResetPassword
 	 * @var array
 	 */
 	protected $hidden = ['password', 'remember_token'];
-
-/*	public function cliente(){
-		return $this->belongsTo('Mobkii\Cliente');
+/*
+	public function negocio(){
+		return $this->belongsTo('Mobkii\Negocio');
 	}*/
+
 	public function pedidos(){
-		return $this->hasMany('Mobkii\Pedido');
+		return $this->belongsToMany('Mobkii\Pedido');
 	}
 }

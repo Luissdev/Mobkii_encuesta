@@ -3,7 +3,10 @@ use Mobkii\Usuario;
 use Mobkii\Http\Requests\EditarUsuarioRequest;
 use Mobkii\Http\Requests\EliminarUsuarioRequest;
 use Mobkii\Http\Requests\AgregarUsuarioRequest;
+use Mobkii\Http\Requests\ImportarUsuarios;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 class UsuarioController extends Controller {
 
 	/*
@@ -43,7 +46,6 @@ class UsuarioController extends Controller {
 		$usuario = Usuario::find($request->get('id'));
 		$usuario->nombre = $request->get('nombre');
 		$usuario->email = $request->get('email');
-		$usuario->admin = $request->get('admin');
 		$usuario->status = $request->get('status');
 		
 		$usuario->save();
@@ -69,12 +71,47 @@ class UsuarioController extends Controller {
 			'nombre' => $request->get('nombre'),
 			'email' => $request->get('email'),
 			'password' => $request->get('password'),
-			'admin' => $request->get('admin'),
 			'status' => $request->get('status'),
 			]);
 
 		return(redirect('auth/usuario'));
 	}
+
+	public function getImportarUsuario(){
+		return view('usuario.importar_usuario');
+	}
+
+	public function postImportarUsuario(ImportarUsuarios $request)
+	{
+		$csv = $request->file('csv');
+		$ruta = '/csv/';
+		$nombre = sha1(Carbon::now()).'.'.$csv->getClientOriginalExtension();
+		$csv->move(getcwd().$ruta, $nombre);
+		$csv = public_path().$ruta.$nombre;
+
+		Excel::load($csv, function($reader) {
+
+			foreach ($reader->get() as $usr) {
+				Usuario::create([
+					'nombre' => $usr->nombre,
+					'email' => $usr->email,
+					'status' => $usr->status
+					]);
+			}
+		});
+		return redirect('auth/usuario')->with('succes', 'La lista de usuarios fue agregada correctamente.');
+	}
+
+
+	public function getExportarUsuarios(){		
+		Excel::create('Filename', function($excel) {
+			$excel->sheet('Sheetname', function($sheet) {
+				$prices = Usuario::get();
+				$sheet->fromModel($prices);
+			});
+		})->download('xls');
+	}
+
 	public function getEditarPerfil(){
 		return "mostrando formulario de perfil";
 	}

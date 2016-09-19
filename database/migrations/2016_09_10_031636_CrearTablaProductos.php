@@ -16,12 +16,15 @@ class CrearTablaProductos extends Migration {
 		{
 			$table->increments('id');
 			$table->string('nombre');
-			$table->double('precio');
 			$table->string('imagen');
 			$table->string('descripcion');
-			$table->smallInteger('id_categoria')->unsigned();
-			$table->foreign('id_categoria')->references('id')->on('categorias');
+			$table->double('precio');
 			$table->smallInteger('status');
+			$table->Integer('id_negocio')->unsigned();
+			$table->foreign('id_negocio')->references('id')->on('negocio');			
+			$table->Integer('id_categoria')->unsigned();
+			$table->foreign('id_categoria')->references('id')->on('categorias');
+			$table->rememberToken();
 			$table->timestamps();
 		});
 	}

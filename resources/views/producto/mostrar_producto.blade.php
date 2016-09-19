@@ -12,7 +12,9 @@
 		<table class="table table-striped custab">
 			<thead>
 				<a href="productos/importar-producto" class="btn btn-primary btn-sm pull-right" style="margin-left: 4px;"> <span class="glyphicon glyphicon-plus"></span> Importar lista de productos</a>
-				<a href="productos/agregar-producto" class="btn btn-primary btn-sm pull-right"><span class="glyphicon glyphicon-plus"></span> Agregar nuevo producto</a>
+				<a href="productos/agregar-producto" class="btn btn-primary btn-sm pull-right" style="margin-left: 4px;"><span class="glyphicon glyphicon-plus"></span> Agregar nuevo producto</a>
+
+				<a href="productos/exportar-productos" class="btn btn-primary btn-sm pull-right" ><span class="glyphicon glyphicon-plus"></span> Exportar lista de productos</a>
 				<tr>
 					<th></th>
 					<th>Nombre</th>

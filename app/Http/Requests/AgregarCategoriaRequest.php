@@ -22,7 +22,9 @@ class AgregarCategoriaRequest extends Request {
 	public function rules()
 	{
 		return [
-			//
+		'nombre' => 'required',
+		'descripcion' => 'required',
+		'status' => 'required',
 		];
 	}
 

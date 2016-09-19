@@ -20,8 +20,8 @@
 
 					<form class="form-horizontal" role="form" method="POST" action="/validacion/registro">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">					
-						<input type="hidden" name="admin" value="1">
 						<input type="hidden" name="status" value="1">
+						<input type="hidden" name="id_admin" value="1">
 
 						<div class="form-group">
 							<label class="col-md-4 control-label">Nombre</label>

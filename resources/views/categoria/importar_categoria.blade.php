@@ -5,7 +5,7 @@
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
 			<div class="panel panel-default">
-				<div class="panel-heading">Agregar producto</div>
+				<div class="panel-heading">Importar lista de categorias</div>
 				<div class="panel-body">
 					@if (count($errors) > 0)
 					<div class="alert alert-danger">
@@ -18,7 +18,7 @@
 					</div>
 					@endif
 
-					<form class="form-horizontal" role="form" method="POST" action="{{ url('/auth/productos/importar-producto') }}" enctype="multipart/form-data">
+					<form class="form-horizontal" role="form" method="POST" action="{{ url('/auth/categoria/importar-categorias') }}" enctype="multipart/form-data">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 						<div class="form-group">
 							<label class="col-md-4 control-label">Archivo</label>
@@ -30,7 +30,7 @@
 						<div class="form-group">
 							<div class="col-md-6 col-md-offset-4">
 								<button type="submit" class="btn btn-primary">
-									Agregar producto
+									Importar
 								</button>
 							</div>
 						</div>
