@@ -30,7 +30,7 @@
 						<div class="form-group">
 							<label class="col-md-4 control-label">Modelos</label>
 							<div class="col-md-6">
-								<select name="id_modelo" class="form-control">
+								<select name="modelo_id" class="form-control">
 									@foreach($modelos as $modelo)
 									<option name="" value="{{$modelo->id}}">{{$modelo->nombre}}</option>
 									@endforeach

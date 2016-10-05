@@ -17,8 +17,10 @@ class CrearTablaDemograficoDetalle extends Migration {
 			$table->increments('id');
 			$table->string('nombre');
 			$table->smallInteger('status');
-			$table->Integer('id_demografico')->unsigned();
-			$table->foreign('id_demografico')->references('id')->on('demografico');
+			$table->Integer('demografico_id')->unsigned();
+			$table->foreign('demografico_id')->references('id')->on('demografico');
+			$table->Integer('encuesta_id')->unsigned();
+			$table->foreign('encuesta_id')->references('id')->on('encuesta');
 			$table->timestamps();
 		});
 	}

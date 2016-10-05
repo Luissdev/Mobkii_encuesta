@@ -23,7 +23,7 @@
 						<div class="form-group">
 							<label class="col-md-4 control-label">Demografico</label>
 							<div class="col-md-6">
-								<select name="id_demografico" class="form-control">
+								<select name="demografico_id" class="form-control">
 									@foreach($demograficos as $demografico)
 									<option name="" value="{{$demografico->id}}">{{$demografico->nombre}}</option>
 									@endforeach

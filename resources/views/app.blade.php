@@ -82,7 +82,7 @@
                             <a href="/auth/encuesta"><i class="fa fa-fw fa-bar-chart-o"></i> Encuesta</a>
                         </li>
                         <li>
-                            <a href="/auth/usuario"><i class="fa fa-fw fa-bar-chart-o"></i> Formato</a>
+                            <a href="/auth/usuario"><i class="fa fa-fw fa-bar-chart-o"></i> Modelos</a>
                         </li>
                         <li>
                         <a href="/auth/demografico"><i class="fa fa-fw fa-bar-chart-o"></i> Demografico</a>

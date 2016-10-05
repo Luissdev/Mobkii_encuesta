@@ -16,8 +16,8 @@ class CrearTablaEncuesta extends Migration {
 		{
 			$table->increments('id');
 			$table->string('nombre');
-			$table->Integer('id_modelo')->unsigned();
-			$table->foreign('id_modelo')->references('id')->on('modelo');
+			$table->Integer('modelo_id')->unsigned();
+			$table->foreign('modelo_id')->references('id')->on('modelo');
 			$table->smallInteger('status');
 			$table->timestamps();
 		});

@@ -72,17 +72,21 @@ class EncuestaController extends Controller {
 		$id = Encuesta::create([
 			'nombre' => $request->get('nombre'),
 			'status' => $request->get('status'),
-			'id_modelo' => $request->get('id_modelo'),
+			'modelo_id' => $request->get('modelo_id'),
 			])->id;
 		/*return redirect('auth/encuesta/demografico-encuesta');*/
-		return redirect('auth/subdemografico/demografico-encuesta/'.$id)->with("succes", "jijij");
+		return redirect('auth/subdemografico/demografico-encuesta/'.$id)->with("succes", "Bien!");
 	}
 
 	public function getEditarEncuesta($id){
 		$encuesta = Encuesta::find($id);
 		$demograficos = Demografico::get();
 		$modelos = Modelo::get();
-		return view("encuesta.editar_encuesta", ["encuesta"=> $encuesta, "demograficos" => $demograficos, "modelos" => $modelos]);
+
+		$subs = Encuesta::find($id)->encuesta_has_subdemografico;
+		return $subs;
+		/*return print (DemograficoDetalle::with('subdemografico_belong_encuesta')->find(4));*/
+/*		return view("encuesta.editar_encuesta", ["encuesta"=> $encuesta, "demograficos" => $demograficos, "modelos" => $modelos]);*/
 	}
 
 	public function getDemograficoEncuesta($id){

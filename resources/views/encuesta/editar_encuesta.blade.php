@@ -5,7 +5,7 @@
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
 			<div class="panel panel-default">
-				<div class="panel-heading">Registrarse</div>
+				<div class="panel-heading">Encuesta</div>
 				<div class="panel-body">
 					@if (count($errors) > 0)
 					<div class="alert alert-danger">
@@ -30,7 +30,7 @@
 						<div class="form-group">
 							<label class="col-md-4 control-label">Modelos</label>
 							<div class="col-md-6">
-								<select name="id_modelo" class="form-control">
+								<select name="modelo_id" class="form-control">
 									@foreach($modelos as $modelo)
 									<option name="" value="{{$modelo->id}}">{{$modelo->nombre}}</option>
 									@endforeach

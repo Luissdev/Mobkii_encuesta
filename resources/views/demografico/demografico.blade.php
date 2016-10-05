@@ -8,19 +8,7 @@
 </div>
 @endif
 <div class="container">
-	<ul id = "myTab" class = "nav nav-tabs">
-		<li class = "active">
-			<a href = "#demografico" data-toggle = "tab">
-				Demograficos
-			</a>
-		</li>
 
-		<li><a href = "#subdemografico" data-toggle = "tab">Subdemograficos</a></li>
-
-	</ul>
-	<div id = "myTabContent" class = "tab-content">
-
-		<div class = "tab-pane fade in active" id = "demografico">
 			<div class="row col-md-10 col-md-offset-1 custyle">
 				<table class="table table-striped custab">
 					<thead>
@@ -49,14 +37,6 @@
 			</div>
 		</div>
 
-		<div class = "tab-pane fade" id = "subdemografico">
-			<p>iOS is a mobile operating system developed and distributed 
-				by Apple Inc. Originally released in 2007 for the iPhone, iPod Touch,
-				and Apple TV. iOS is derived from OS X, with which it shares the 
-				Darwin foundation. iOS is Apple's mobile version of the OS X 
-				operating system used on Apple computers.</p>
-			</div>
-		</div>
 
 
 		<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">

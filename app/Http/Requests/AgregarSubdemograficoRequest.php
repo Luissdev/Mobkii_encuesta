@@ -22,7 +22,7 @@ class AgregarSubdemograficoRequest extends Request {
 	public function rules()
 	{
 		return [
-		'id_encuesta' => 'required',
+		'encuesta_id' => 'required',
 		];
 	}
 }

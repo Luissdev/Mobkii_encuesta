@@ -69,7 +69,7 @@ class DemograficoController extends Controller {
 		Demografico::create([
 			'nombre' => $request->get('nombre'),
 			'status' => 1,
-			'id_encuesta' => $request->get('id_encuesta'),
+			'encuesta_id' => $request->get('encuesta_id'),
 			]);
 
 		return redirect('auth/demografico')->with("succes", "El demografico fue agregadocorrectamente");
@@ -89,7 +89,7 @@ class DemograficoController extends Controller {
 	public function postAgregarDemograficoDetalle(AgregarSubdemograficoRequest $request){
 		DemograficoDetalle::create([
 			'nombre' => $request->get('nombre'),
-			'id_demografico' => $request->get('id_demografico'),
+			'demografico_id' => $request->get('demografico_id'),
 			'status' => 1,
 			]);
 

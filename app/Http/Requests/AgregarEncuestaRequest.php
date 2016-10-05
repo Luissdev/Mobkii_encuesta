@@ -23,7 +23,7 @@ class AgregarEncuestaRequest extends Request {
 	{
 		return [
 			'nombre' => 'required',
-			'id_modelo' => 'required',
+			'modelo_id' => 'required',
 		];
 	}
 
