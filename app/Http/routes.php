@@ -16,9 +16,8 @@ Route::controllers([
 	'validacion' => 'Validacion\ValidacionController',
 	'validado' => 'InicioController',
 	'auth/usuario' => 'UsuarioController',
-	'auth/productos' => 'ProductoController',
-	'auth/pedidos' => 'PedidoController',
-	'auth/categoria' => 'CategoriaController',
-	'/tienda' => 'TiendaController',
+	'auth/demografico' => 'DemograficoController',
+	'auth/subdemografico' => 'DemograficoDetalleController',
+	'auth/encuesta' => 'EncuestaController',
 	'/' => 'BienvenidoController',
 ]);

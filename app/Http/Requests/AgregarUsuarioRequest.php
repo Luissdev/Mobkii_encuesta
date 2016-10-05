@@ -24,7 +24,7 @@ class AgregarUsuarioRequest extends Request {
 	{
 		return [
 			'nombre' => 'required',
-			'email' => 'required|email',
+			'email' => 'required|email|unique:usuario',
 			'password' => 'required|min:6|confirmed',
 			'admin' => 'required,',
 			'status' => 'required',

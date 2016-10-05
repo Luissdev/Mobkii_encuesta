@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Negocio extends Model{
+class Cliente extends Model{
 
 
 	/**
@@ -10,7 +10,7 @@ class Negocio extends Model{
 	 *
 	 * @var string
 	 */
-	protected $table = 'negocio';
+	protected $table = 'cliente';
 
 	/**
 	 * The attributes that are mass assignable.
@@ -25,13 +25,4 @@ class Negocio extends Model{
 	 * @var array
 	 */
 	protected $hidden = ['password', 'remember_token'];
-
-/*	public function usuarios(){
-		return $this->hasMany('Mobkii\Usuario');
-	}
-*/
-	public function productos(){
-		return $this->hasMany('Mobkii\Producto');
-	}
-
 }

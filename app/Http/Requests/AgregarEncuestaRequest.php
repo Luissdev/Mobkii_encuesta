@@ -2,7 +2,7 @@
 
 use Mobkii\Http\Requests\Request;
 
-class EditarCategoriaRequest extends Request {
+class AgregarEncuestaRequest extends Request {
 
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -22,9 +22,8 @@ class EditarCategoriaRequest extends Request {
 	public function rules()
 	{
 		return [
-		'nombre' => 'required',
-		'descripcion' => 'required',
-		'status' => 'required',
+			'nombre' => 'required',
+			'id_modelo' => 'required',
 		];
 	}
 

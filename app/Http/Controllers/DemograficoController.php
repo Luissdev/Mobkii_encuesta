@@ -1,13 +1,12 @@
 <?php namespace Mobkii\Http\Controllers;
-use Mobkii\Usuario;
-use Mobkii\Http\Requests\EditarUsuarioRequest;
-use Mobkii\Http\Requests\EliminarUsuarioRequest;
-use Mobkii\Http\Requests\AgregarUsuarioRequest;
-use Mobkii\Http\Requests\ImportarUsuarios;
+use Mobkii\Demografico;
+use Mobkii\DemograficoDetalle;
+use Mobkii\Http\Requests\AgregarDemograficoRequest;
+use Mobkii\Http\Requests\AgregarSubdemograficoRequest;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
-class UsuarioController extends Controller {
+class DemograficoController extends Controller {
 
 	/*
 	|--------------------------------------------------------------------------
@@ -31,18 +30,18 @@ class UsuarioController extends Controller {
 	}
 
 	public function getIndex(){
-		$usuarios = Usuario::get();
-
-		return view('usuario.mostrar_usuario', ['usuarios'=> $usuarios]);
+		$demograficos = Demografico::get();
+		$demograficos_detalle = DemograficoDetalle::get();
+		return view('demografico.demografico', ['demograficos'=> $demograficos, 'demograficos_detalle' => $demograficos_detalle]);
 	}
 
-	public function getEditarUsuario($id){
+/*	public function getEditarUsuario($id){
 
 		$usuario = Usuario::find($id);
 		return view('usuario.editar_usuario', ['usuario'=>$usuario]);
-	}
+	}*/
 
-	public function postEditarUsuario(EditarUsuarioRequest $request){
+/*	public function postEditarUsuario(EditarUsuarioRequest $request){
 		$usuario = Usuario::find($request->get('id'));
 		$usuario->nombre = $request->get('nombre');
 		$usuario->email = $request->get('email');
@@ -51,37 +50,57 @@ class UsuarioController extends Controller {
 		$usuario->save();
 
 		return redirect("auth/usuario")->with('actualizado', 'El usuario fue actualizado correctamente');
-	}
+	}*/
 
 
-	public function getEliminarUsuario($id){
+/*	public function getEliminarUsuario($id){
 		$usuario = Usuario::find($id);
 
 		$usuario->delete();
 
 		return redirect('auth/usuario/');
+	}*/
+
+	public function getAgregarDemografico(){
+		return view('demografico.agregar_demografico');
 	}
 
-	public function getAgregarUsuario(){
-		return view('usuario.agregar_usuario');
-	}
-
-	public function postAgregarUsuario(AgregarUsuarioRequest $request){
-		Usuario::create([
+	public function postAgregarDemografico(AgregarDemograficoRequest $request){
+		Demografico::create([
 			'nombre' => $request->get('nombre'),
-			'email' => $request->get('email'),
-			'password' => $request->get('password'),
-			'status' => $request->get('status'),
+			'status' => 1,
+			'id_encuesta' => $request->get('id_encuesta'),
 			]);
 
-		return redirect('auth/usuario')->with("succes", "El usuario fue agregadocorrectamente");
+		return redirect('auth/demografico')->with("succes", "El demografico fue agregadocorrectamente");
 	}
 
-	public function getImportarUsuario(){
+
+	public function getAgregarSubdemografico(){
+		$demograficos = Demografico::get();
+		return view('demografico_detalle.agregar_demografico_detalle', ['demograficos' => $demograficos]);
+	}
+
+	public function getAgregarDemograficoDetalle(){
+		$demograficos = Demografico::get();
+		return view('demografico_detalle.agregar_demografico_detalle', ['demograficos' => $demograficos]);
+	}
+
+	public function postAgregarDemograficoDetalle(AgregarSubdemograficoRequest $request){
+		DemograficoDetalle::create([
+			'nombre' => $request->get('nombre'),
+			'id_demografico' => $request->get('id_demografico'),
+			'status' => 1,
+			]);
+
+		return redirect('auth/demografico')->with("succes", "El subdemografico fue agregadocorrectamente");
+	}
+
+/*	public function getImportarUsuario(){
 		return view('usuario.importar_usuario');
 	}
-
-	public function postImportarUsuario(ImportarUsuarios $request)
+*/
+/*	public function postImportarUsuario(ImportarUsuarios $request)
 	{
 		$csv = $request->file('csv');
 		$ruta = '/csv/';
@@ -100,29 +119,29 @@ class UsuarioController extends Controller {
 			}
 		});
 		return redirect('auth/usuario')->with('succes', 'La lista de usuarios fue agregada correctamente.');
-	}
+	}*/
 
 
-	public function getExportarUsuarios(){		
+/*	public function getExportarUsuarios(){		
 		Excel::create('Filename', function($excel) {
 			$excel->sheet('Sheetname', function($sheet) {
 				$prices = Usuario::get();
 				$sheet->fromModel($prices);
 			});
 		})->download('xls');
-	}
+	}*/
 
 	public function getEditarPerfil(){
 		return "mostrando formulario de perfil";
 	}
 
-	public function getSeedUsuario(){
+/*	public function getSeedUsuario(){
 		\Iseed::generateSeed('negocio');
 		\Iseed::generateSeed('usuarios');
 		\Iseed::generateSeed('categorias');
 		\Iseed::generateSeed('productos');
 		\Iseed::generateSeed('pedidos');
-	}
+	}*/
 
 	public function postEditarPerfil(){
 		return "generando actualizacion de perifl";
