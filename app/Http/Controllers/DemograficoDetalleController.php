@@ -43,10 +43,8 @@ class DemograficoDetalleController extends Controller {
 
 	public function getAgregarSubdemografico($id){
 		$encuesta = Encuesta::find($id);
-		$enc = Encuesta::get();
-		$subdemograficos = DemograficoDetalle::with('demografico')->get();
+		$subdemograficos = $encuesta->encuesta_has_subdemografico;
 		return view("demografico_detalle.agregar_subdemografico", ["encuesta"=>$encuesta, 'subdemograficos' =>$subdemograficos]);
-	
 	}
 
 	public function getEditarSubdemografico(){
@@ -54,6 +52,7 @@ class DemograficoDetalleController extends Controller {
 		return redirect('auth/subdemografico/demografico-encuesta/'.$id)->with("succes", "jijij");
 	}
 	public function postAgregarSubdemografico(AgregarSubdemograficoRequest $request){
+		
 		$ar = $request->get('subdemografico');
 		foreach ($ar as $key) {
 			DemograficoDetalle::create([

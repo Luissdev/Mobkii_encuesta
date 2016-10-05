@@ -30,6 +30,16 @@
 								<button type="submit" class="btn btn-primary">
 									Agregar subdemograficos
 								</button>
+								@foreach($subdemograficos as $sd)
+								<div class="entry input-group col-xs-3" style="margin-top: 10px;">
+									<input class="form-control" name="subdemografico[]" type="text" placeholder="{{$sd->nombre}}" />
+									<span class="input-group-btn">
+										<button class="btn btn-danger btn-remove btn-dunidad" type="button">
+											<span class="glyphicon glyphicon-minus"></span>
+										</button>
+									</span>
+								</div>
+								@endforeach
 								<div class="entry input-group col-xs-3" style="margin-top: 10px;">
 									<input class="form-control" name="subdemografico[]" type="text" placeholder="Ingrese el subdemografico" />
 									<span class="input-group-btn">
@@ -38,67 +48,68 @@
 										</button>
 									</span>
 								</div>
-							</form>
+
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
 
-		<div class = "tab-pane fade" id = "localidad">
-			<div class="container">
-				<div class="row">
-					<div class="control-group" id="fields">
-						<label class="control-label" for="field1">Agregar subdemograficos</label>
-						<div class="localidad"> 
-							<form role="form" method="POST" action="{{ url('/auth/subdemografico/agregar-subdemografico') }}">
-								<input type="hidden" name="_token" value="{{ csrf_token() }}">
-								<input type="hidden" name="status" value="1">
-								<input type="hidden" name="demografico_id" value="2">
-								<input type="hidden" name="encuesta_id" value="{{$encuesta->id}}">
-								<button type="submit" class="btn btn-primary">
-									Agregar subdemograficos
-								</button>
-								<div class="entry input-group col-xs-3" style="margin-top: 10px;">
-									<input class="form-control" name="subdemografico[]" type="text" placeholder="Ingrese el subdemografico" />
-									<span class="input-group-btn">
-										<button class="btn btn-success btn-add btn-localidad" type="button">
-											<span class="glyphicon glyphicon-plus"></span>
-										</button>
-									</span>
-								</div>
-							</form>
+			<div class = "tab-pane fade" id = "localidad">
+				<div class="container">
+					<div class="row">
+						<div class="control-group" id="fields">
+							<label class="control-label" for="field1">Agregar subdemograficos</label>
+							<div class="localidad"> 
+								<article>
+									<input type="hidden" name="_token" value="{{ csrf_token() }}">
+									<input type="hidden" name="status" value="1">
+									<input type="hidden" name="demografico_id" value="2">
+									<input type="hidden" name="encuesta_id" value="{{$encuesta->id}}">
+									<button type="submit" class="btn btn-primary">
+										Agregar subdemograficos
+									</button>
+									<div class="entry input-group col-xs-3" style="margin-top: 10px;">
+										<input class="form-control" name="subdemografico[]" type="text" placeholder="Ingrese el subdemografico" />
+										<span class="input-group-btn">
+											<button class="btn btn-success btn-add btn-localidad" type="button">
+												<span class="glyphicon glyphicon-plus"></span>
+											</button>
+										</span>
+									</div>
+								</article>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
 
-		<div class = "tab-pane fade" id = "personal">
-			<div class="container">
-				<div class="row">
-					<div class="control-group" id="fields">
-						<label class="control-label" for="field1">Agregar subdemograficos</label>
-						<div class="personal"> 
-							<form role="form" method="POST" action="{{ url('/auth/subdemografico/agregar-subdemografico') }}">
-								<input type="hidden" name="_token" value="{{ csrf_token() }}">
-								<input type="hidden" name="status" value="1">
-								<input type="hidden" name="demografico_id" value="3">
-								<input type="hidden" name="encuesta_id" value="{{$encuesta->id}}">
-								<button type="submit" class="btn btn-primary">
-									Agregar subdemograficos
-								</button>
-								<div class="entry input-group col-xs-3" style="margin-top: 10px;">
-									<input class="form-control" name="subdemografico[]" type="text" placeholder="Ingrese el subdemografico" />
-									<span class="input-group-btn">
-										<button class="btn btn-success btn-add btn-personal" type="button">
-											<span class="glyphicon glyphicon-plus"></span>
-										</button>
-									</span>
-								</div>
-							</form>
+			<div class = "tab-pane fade" id = "personal">
+				<div class="container">
+					<div class="row">
+						<div class="control-group" id="fields">
+							<label class="control-label" for="field1">Agregar subdemograficos</label>
+							<div class="personal"> 
+								<article>
+									<input type="hidden" name="_token" value="{{ csrf_token() }}">
+									<input type="hidden" name="status" value="1">
+									<input type="hidden" name="demografico_id" value="3">
+									<input type="hidden" name="encuesta_id" value="{{$encuesta->id}}">
+									<button type="submit" class="btn btn-primary">
+										Agregar subdemograficos
+									</button>
+									<div class="entry input-group col-xs-3" style="margin-top: 10px;">
+										<input class="form-control" name="subdemografico[]" type="text" placeholder="Ingrese el subdemografico" />
+										<span class="input-group-btn">
+											<button class="btn btn-success btn-add btn-personal" type="button">
+												<span class="glyphicon glyphicon-plus"></span>
+											</button>
+										</span>
+									</div>
+								</article>
+							</div>
 						</div>
-					</div>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -137,7 +148,7 @@
 			{
 				e.preventDefault();
 
-				var controlForm = $('.localidad form:first'),
+				var controlForm = $('.localidad article:first'),
 				currentEntry = $(this).parents('.entry:first'),
 				newEntry = $(currentEntry.clone()).appendTo(controlForm);
 
@@ -162,7 +173,7 @@
 			{
 				e.preventDefault();
 
-				var controlForm = $('.personal form:first'),
+				var controlForm = $('.personal article:first'),
 				currentEntry = $(this).parents('.entry:first'),
 				newEntry = $(currentEntry.clone()).appendTo(controlForm);
 
