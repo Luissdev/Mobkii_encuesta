@@ -24,7 +24,7 @@
 					</div>
 					@endif --}}
 
-					<form class="form-horizontal" role="form" method="POST" action="/validacion/recuperar">
+					<form class="form-horizontal" role="form" method="POST" action="{{ url('validacion/recuperar') }}">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">					
 						{{-- <input type="hidden" name="admin" value="0"> --}}
 						<input type="hidden" name="status" value="1">

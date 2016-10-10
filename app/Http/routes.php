@@ -19,5 +19,6 @@ Route::controllers([
 	'auth/demografico' => 'DemograficoController',
 	'auth/subdemografico' => 'DemograficoDetalleController',
 	'auth/encuesta' => 'EncuestaController',
+	'auth/modelo' => 'ModeloController',
 	'/' => 'BienvenidoController',
 ]);

@@ -47,24 +47,26 @@ class DemograficoDetalleController extends Controller {
 		return view("demografico_detalle.agregar_subdemografico", ["encuesta"=>$encuesta, 'subdemograficos' =>$subdemograficos]);
 	}
 
+	public function postAgregarSubdemografico(AgregarSubdemograficoRequest $request){
+		DemograficoDetalle::where('encuesta_id', '=', $request->get('encuesta_id'))->where('demografico_id', '=', $request->get('demografico_id'))->delete();
+		$ar = $request->get('subdemografico');
+		foreach ($ar as $key) {
+			if ($key != '') {
+				DemograficoDetalle::create([
+					'nombre' => $key,
+					'status' => $request->get('status'),
+					'encuesta_id'=>$request->get('encuesta_id'),
+					'demografico_id'=>$request->get('demografico_id'),
+					]);
+			}
+		}
+		return redirect('auth/subdemografico/agregar-subdemografico/'.$request->get('encuesta_id'));
+	}
+	
 	public function getEditarSubdemografico(){
 		$subs = Encuesta::find($id)->encuesta_has_subdemografico;
 		return redirect('auth/subdemografico/demografico-encuesta/'.$id)->with("succes", "jijij");
 	}
-	public function postAgregarSubdemografico(AgregarSubdemograficoRequest $request){
-
-		$ar = $request->get('subdemografico');
-		foreach ($ar as $key) {
-			DemograficoDetalle::create([
-				'nombre' => $key,
-				'status' => $request->get('status'),
-				'encuesta_id'=>$request->get('encuesta_id'),
-				'demografico_id'=>$request->get('demografico_id'),
-				]);
-		}
-		return "hola";
-	}
-	
 	public function getEditarPerfil(){
 		return "mostrando formulario de perfil";
 	}

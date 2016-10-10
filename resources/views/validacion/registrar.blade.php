@@ -18,7 +18,7 @@
 					</div>
 					@endif
 
-					<form class="form-horizontal" role="form" method="POST" action="/validacion/registro">
+					<form class="form-horizontal" role="form" method="POST" action="{{ url('validacion/registro') }}">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">					
 						<input type="hidden" name="status" value="1">
 						<input type="hidden" name="id_admin" value="1">

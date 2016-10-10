@@ -4,6 +4,7 @@ use Mobkii\DemograficoDetalle;
 use Mobkii\Demografico;
 use Mobkii\Modelo;
 use Mobkii\Http\Requests\AgregarDemograficoRequest;
+use Mobkii\Http\Requests\EditarEncuestaRequest;
 use Mobkii\Http\Requests\AgregarSubdemograficoRequest;
 use Mobkii\Http\Requests\AgregarEncuestaRequest;
 use Carbon\Carbon;
@@ -48,8 +49,10 @@ class EncuestaController extends Controller {
 			'status' => $request->get('status'),
 			'modelo_id' => $request->get('modelo_id'),
 			])->id;
+		$encuesta = Encuesta::find($id);
+		$subdemograficos = $encuesta->encuesta_has_subdemografico;
 		/*return redirect('auth/encuesta/demografico-encuesta');*/
-		return redirect('auth/subdemografico/demografico-encuesta/'.$id)->with("succes", "Bien!");
+		return view('demografico_detalle.agregar_subdemografico',["subdemograficos"=>$subdemograficos, "encuesta"=>$encuesta]);
 	}
 
 	public function getEditarEncuesta($id){
@@ -58,8 +61,18 @@ class EncuestaController extends Controller {
 		$modelos = Modelo::get();
 
 		$subs = Encuesta::find($id)->encuesta_has_subdemografico;
-		return $subs;
 		return view("encuesta.editar_encuesta", ["encuesta"=> $encuesta, "demograficos" => $demograficos, "modelos" => $modelos]);
+	}
+
+	public function postEditarEncuesta(EditarEncuestaRequest $request){
+		$encuesta = Encuesta::find($request->get('id'));
+		$encuesta->nombre = $request->get('nombre');
+		$encuesta->status = $request->get('status');
+		$encuesta->modelo_id = $request->get('modelo_id');
+
+		$encuesta->save();
+
+		return redirect('/auth/encuesta');
 	}
 
 	public function getDemograficoEncuesta($id){
@@ -69,8 +82,34 @@ class EncuestaController extends Controller {
 	}
 
 
-	public function getEditarPerfil(){
-		return "mostrando formulario de perfil";
+	public function getEliminarEncuesta($id){
+		$encuesta = Encuesta::find($id);
+		DemograficoDetalle::where('encuesta_id', $id)->delete();
+		$encuesta->delete();
+		$mensaje = "La encuesta ".$encuesta->nombre." se ha eliminado corectamente";
+		return $mensaje;
+	}
+
+	public function getAgregarSubdemografico($id){
+		$encuesta = Encuesta::find($id);
+		$subdemograficos = $encuesta->encuesta_has_subdemografico;
+		return view("demografico_detalle.agregar_subdemografico", ["encuesta"=>$encuesta, 'subdemograficos' =>$subdemograficos]);
+	}
+
+	public function postAgregarSubdemografico(AgregarSubdemograficoRequest $request){
+		DemograficoDetalle::where('encuesta_id', '=', $request->get('encuesta_id'))->where('demografico_id', '=', $request->get('demografico_id'))->delete();
+		$ar = $request->get('subdemografico');
+		foreach ($ar as $key) {
+			if ($key != '') {
+				DemograficoDetalle::create([
+					'nombre' => $key,
+					'status' => $request->get('status'),
+					'encuesta_id'=>$request->get('encuesta_id'),
+					'demografico_id'=>$request->get('demografico_id'),
+					]);
+			}
+		}
+		return redirect('auth/encuesta/agregar-subdemografico/'.$request->get('encuesta_id'));
 	}
 
 /*	public function getSeedUsuario(){
@@ -81,7 +120,7 @@ class EncuestaController extends Controller {
 		\Iseed::generateSeed('pedidos');
 	}*/
 
-	public function postEditarPerfil(){
+	public function postEliminarEncuesta($id){
 		return "generando actualizacion de perifl";
 	}
 

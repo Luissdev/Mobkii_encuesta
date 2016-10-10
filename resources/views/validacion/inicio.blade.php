@@ -25,7 +25,7 @@
 					</div>
 					@endif
 
-					<form class="form-horizontal" role="form" method="POST" action="/validacion/inicio">
+					<form class="form-horizontal" role="form" method="POST" action="{{ url('validacion/inicio') }}">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 						<div class="form-group">
@@ -57,7 +57,7 @@
 								<button type="submit" class="btn btn-primary" style="margin-right: 15px;">
 									Iniciar sesión
 								</button>
-								<a href="/validacion/recuperar">Olvidé mi contraseña</a>
+								<a href="{{ url('validacion/recuperar') }}">Olvidé mi contraseña</a>
 							</div>
 						</div>
 					</form>

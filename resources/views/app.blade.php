@@ -6,17 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Mobkii</title>
 
-    <link href="/css/app.css" rel="stylesheet">
-    <link href="/css/dropzone.css" rel="stylesheet">
+    <link href="{{ URL::asset('css/app.css') }}" rel="stylesheet">
 
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ URL::asset('css/bootstrap.min.css') }}" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="/css/sb-admin.css" rel="stylesheet">
+    <link href="{{ URL::asset('css/sb-admin.css') }}" rel="stylesheet">
 
     <!-- Morris Charts CSS -->
-    <link href="/css/plugins/morris.css" rel="stylesheet">
-
+    <link href="{{ URL::asset('css/plugins/morris.css') }}" rel="stylesheet">
+    <script src="{{ URL::asset('js/jquery-3.1.1.min.js') }}"></script>
     <!-- Fonts -->
     <link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
 
@@ -46,10 +45,10 @@
                 <ul class="nav navbar-right top-nav">
                     @if (Auth::guest())
                     <li>
-                        <a href="/validacion/registro"><i class="fa fa-fw fa-user"></i> Registrarse</a>
+                    <a href="{{ url('/validacion/registro') }}"><i class="fa fa-fw fa-user"></i> Registrarse</a>
                     </li>
                     <li>
-                        <a href="/validacion/inicio"><i class="fa fa-fw fa-envelope"></i> Iniciar sesión</a>
+                        <a href="{{ url('/validacion/inicio') }}"><i class="fa fa-fw fa-envelope"></i> Iniciar sesión</a>
                     </li>
                     @else
                     <li class="dropdown">
@@ -66,29 +65,29 @@
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a href="/validacion/salida"><i class="fa fa-fw fa-power-off"></i> Salir</a>
+                                <a href="{{ url('/validacion/salida') }}"><i class="fa fa-fw fa-power-off"></i> Salir</a>
                             </li>
                         </ul>
                     </li>
                     @endif
                 </ul>
                 <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+                @if(Auth::guest())
+                @else
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
                     <ul class="nav navbar-nav side-nav">
-                        <li class="active">
-                            <a href="/"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                        <li {{{ (Request::segment(1) === 'validado' ? 'class=active' : '') }}}>
+                            <a href="{{ url('/validado') }}"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                         </li>
-                        <li>
-                            <a href="/auth/encuesta"><i class="fa fa-fw fa-bar-chart-o"></i> Encuesta</a>
+                        <li {{{ (Request::segment(2) === 'encuesta' ? 'class=active' : '') }}}>
+                            <a href="{{ url('/auth/encuesta') }}"><i class="fa fa-fw fa-bar-chart-o"></i> Encuesta</a>
                         </li>
-                        <li>
-                            <a href="/auth/usuario"><i class="fa fa-fw fa-bar-chart-o"></i> Modelos</a>
-                        </li>
-                        <li>
-                        <a href="/auth/demografico"><i class="fa fa-fw fa-bar-chart-o"></i> Demografico</a>
+                        <li {{{ (Request::segment(2) === 'modelo' ? 'class=active' : '') }}}>
+                            <a href="{{ url('/auth/modelo') }}"><i class="fa fa-fw fa-bar-chart-o"></i> Modelos</a>
                         </li>
                     </ul>
                 </div>
+                @endif
                 <!-- /.navbar-collapse -->
             </nav>
             @if(Session::has('succes'))
@@ -99,12 +98,8 @@
             @endif
             @yield('content')
         </div>
-
-
-
         <!-- Scripts -->
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
-        <script src="/js/dropzone.js"></script>
     </body>
     </html>
