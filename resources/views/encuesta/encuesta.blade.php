@@ -11,7 +11,7 @@
 	<div class="row col-md-10 col-md-offset-1 custyle">
 		<table class="table table-striped custab">
 			<thead>
-				<a href="{{ url('/encuesta/agregar-encuesta') }}" class="btn btn-primary btn-sm pull-right" style="margin-left: 4px;"><span class="glyphicon glyphicon-plus"></span> Agregar nueva encuesta</a>
+				<a href="{{ url('auth/encuesta/agregar-encuesta') }}" class="btn btn-primary btn-sm pull-right" style="margin-left: 4px;"><span class="glyphicon glyphicon-plus"></span> Agregar nueva encuesta</a>
 				<tr>
 					<th>Nombre</th>
 					<th>Modelo</th>

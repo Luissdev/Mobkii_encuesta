@@ -17,7 +17,7 @@ class Encuesta extends Model{
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['id', 'nombre', 'modelo_id', 'status'];
+	protected $fillable = ['id', 'nombre', 'modelo_id', 'fecha_inicio', 'fecha_fin', 'status'];
 
 	public function encuesta_belong_modelo(){
 		return $this->belongsTo('Mobkii\Modelo');
@@ -25,5 +25,9 @@ class Encuesta extends Model{
 
 	public function encuesta_has_subdemografico(){
 		return $this->hasMany('Mobkii\DemograficoDetalle');
+	}
+
+	public function encuesta_detale(){
+		return $this->hasMany('Mobkii\Encuesta_Detalle');
 	}
 }

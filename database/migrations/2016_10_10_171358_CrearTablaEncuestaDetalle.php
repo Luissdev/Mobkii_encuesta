@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CrearTablaEncuesta extends Migration {
+class CrearTablaEncuestaDetalle extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,15 +12,14 @@ class CrearTablaEncuesta extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('encuesta', function(Blueprint $table)
+		Schema::create('encuesta_detalle', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('nombre');
+			$table->smallInteger('valor');
+			$table->Integer('encuesta_id')->unsigned();
+			$table->foreign('encuesta_id')->references('id')->on('encuesta');
 			$table->Integer('modelo_id')->unsigned();
 			$table->foreign('modelo_id')->references('id')->on('modelo');
-			$table->date('fecha_inicio');
-			$table->date('fecha_fin');
-			$table->smallInteger('status');
 			$table->timestamps();
 		});
 	}
@@ -32,7 +31,7 @@ class CrearTablaEncuesta extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('encuesta');
+		Schema::drop('encuesta_detalle');
 	}
 
 }

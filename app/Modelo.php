@@ -23,5 +23,15 @@ class Modelo extends Model{
 		return $this->hasMany('Mobkii\Encuesta');
 	}
 
-	
+	public function modelo_has_dimension(){
+		return $this->hasMany('Mobkii\Dimension');
+	}
+
+	public function encuesta_detalle(){
+		return $this->hasMany('Mobkii\Encuesta_Detalle');
+	}
+
+	public function modelo_detalle(){
+		return $this->hasMany('Mobkii\Modelo_detalle');
+	}
 }

@@ -21,12 +21,12 @@
 					<form class="form-horizontal margen" role="form" method="POST" action="{{ url('/auth/encuesta/agregar-encuesta') }}">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 						<input type="hidden" name="status" value="1">
-							<div class="form-group">
-								<label class="col-md-4 control-label">Nombre</label>
-								<div class="col-md-6">
-									<input type="text" class="form-control" name="nombre" value="{{old('nombre')}}">
-								</div>
+						<div class="form-group">
+							<label class="col-md-4 control-label">Nombre</label>
+							<div class="col-md-6">
+								<input type="text" class="form-control" name="nombre" value="{{old('nombre')}}">
 							</div>
+						</div>
 						<div class="form-group">
 							<label class="col-md-4 control-label">Modelos</label>
 							<div class="col-md-6">
@@ -37,18 +37,54 @@
 								</select>
 							</div>
 						</div>
-
-						<div class="form-group">
-							<div class="col-md-6 col-md-offset-4">
-								<button type="submit" class="btn btn-primary">
-									Agregar encuesta
-								</button>
+						
+<!-- 						<div class="well">
+							<div id="datetimepicker1" class="input-append date">
+								<input data-format="dd/MM/yyyy hh:mm:ss" type="text"></input>
+								<span class="add-on">
+									<i data-time-icon="icon-time" data-date-icon="icon-calendar">
+									</i>
+								</span>
 							</div>
 						</div>
-					</form>
-				</div>
+						<script type="text/javascript">
+
+							$.getScript("http://tarruda.github.io/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js", function(){
+								$.getScript("http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.pt-BR.js", function(){
+
+									$('#datetimepicker1').datetimepicker({
+										language: 'pt-BR'
+									});
+
+
+
+							});//get script
+							});//
+						</script> -->
+
+					
+					<div class="form-group">
+						<div class="col-md-6 col-md-offset-4">
+							<button type="submit" class="btn btn-primary">
+								Agregar encuesta
+							</button>
+						</div>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
 </div>
+</div>
+
+<script>
+	$.getScript("http://tarruda.github.io/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js", function(){
+		$.getScript("http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.pt-BR.js", function(){
+
+			$('#datetimepicker1').datetimepicker();
+
+
+	});//get script
+	});//get script
+</script>
 @endsection

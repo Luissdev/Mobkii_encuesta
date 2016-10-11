@@ -3,6 +3,7 @@ use Mobkii\Encuesta;
 use Mobkii\DemograficoDetalle;
 use Mobkii\Demografico;
 use Mobkii\Modelo;
+use Mobkii\Dimension;
 use Mobkii\Http\Requests\AgregarModeloRequest;
 use Mobkii\Http\Requests\EditarModeloRequest;
 use Mobkii\Http\Requests\EditarEncuestaRequest;
@@ -32,6 +33,11 @@ class ModeloController extends Controller {
 	public function __construct()
 	{
 		$this->middleware('auth');
+	}
+
+	public function getModeloDetalle($id){
+		$dimension = Dimension::where('padre_id', $id)->get();;
+		return  $dimension;
 	}
 
 	public function getIndex(){

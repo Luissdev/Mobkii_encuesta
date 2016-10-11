@@ -11,12 +11,13 @@
 	<div class="row col-md-10 col-md-offset-1 custyle">
 		<table class="table table-striped custab">
 			<thead>
-				<a href="{{ url('encuesta/agregar-modelo') }}" class="btn btn-primary btn-sm pull-right" style="margin-left: 4px;"><span class="glyphicon glyphicon-plus"></span> Agregar nuevo modelo</a>
+				<a href="{{ url('auth/modelo/agregar-modelo') }}" class="btn btn-primary btn-sm pull-right" style="margin-left: 4px;"><span class="glyphicon glyphicon-plus"></span> Agregar nuevo modelo</a>
 				<tr>
 					<th>Nombre</th>
 					<th class="text-center">Acción</th>
 				</tr>
 			</thead>
+			@if(count($modelos)>0)
 			@foreach($modelos as $usr)
 			<tr data-id="{{$usr->id}}">
 				<td>{{$usr->nombre}}</td>
@@ -51,7 +52,7 @@
 		</div>
 	</div>
 </div> -->
-
+@endif
 <script>
 	$(document).ready(function(){
 		$('.btn-delete').click(function(){
